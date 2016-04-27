@@ -1,0 +1,185 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>Register As A New User</title>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<style>
+#target, #src > img {border: thin solid black; padding: 2px; margin:4px;}
+#target {height: 81px; width: 81px; text-align: center; display: table;}
+#target > p {display: table-cell; vertical-align: middle;}
+#target > img {margin: 1px;}
+img.dragged {background-color: lightgrey;}
+</style>
+
+<script>
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    ev.target.appendChild(document.getElementById(data));
+}
+</script>
+
+</head>
+<body background= "01.png">
+		 <center>
+            <div>
+                <div align="center" style="width:700px;border-radius:20px;padding:10px;border:3px solid black">
+			<div class="header">		
+				
+				<h1 style="margin-top: 0px; margin-bottom: 0px;background-color:grey;color">New User Registration</h1>
+			</div></br>
+				<hr class="hr-line"></hr>
+				
+				<!-- Content -->
+				<form id="registrationForm" method="" action="">
+					<table id="table">
+							<tr>
+								<td id="td_right"><label for="userid">User ID:</label></td>
+								
+								<td id="td_left"><input type="text" name="uuserid" id="userid" value="" tabindex="1" placeholder="User Id"/></td>
+							</tr>
+							<tr>
+								<td id="td_right"><label for="password_new">Password:</label></td>
+								
+								<td id="td_left"><input size="20" name="password.new" id="password_new" value="" maxlength="20"  onkeyup="chkPasswordStrength(this.value)" tabindex="2" type="password" placeholder="Password"/><div id="error"></div></td>
+								<td>
+								
+								<progress id="pbar" value="0" max="50" ></progress><div id="prglabel" ></div>
+								</td>
+							<tr>
+								<td id="td_right"><label for="password_new_confirm">Verify Password</label></td>
+							
+								<td id="td_left"><input name="password.new.confirm" id="password_new_confirm" value="" size="20" maxlength="20" tabindex="3" type="password" onkeyup="checkPasswordMatch();" placeholder="Confirm Password"/><div id="divCheckPasswordMatch">
+									</div></td>
+									
+							</tr>					
+								<td id="td_right"><label for="email_address">Email Address</label></td>
+					
+								<td id="td_left"><input name="email.address" id="email_address" value="" size="20" tabindex="4" type="email" placeholder="Email"/></td>
+							<tr>
+								<td id="td_right"><label for="email_address2">Verify Email Address</label></td>
+					
+								<td id="td_left"><input name="email.address.confirm" id="email_address2" value="" size="20" tabindex="5" type="email" onkeyup="checkEmailMatch();" placeholder="Verify email"/><div id="divCheckEmailMatch"></div></td>
+							</tr>
+							<tr>
+								<td id="td_right"><label for="secret_question0">Security Question</label></td>
+					
+								<td id="td_left">
+									<select name="secret.question0" id="secret_question0" class="select" tabindex="6">
+									<option value="0">--</option>
+									<option value="1">Sum of 2 + 3 = ?</option>
+									<option value="2">Sum of 100 + 200 = ?</option>
+									<option value="3">23 x 100 = ?</option>
+									<option value="4">Capital of India?</option>
+									<option value="5">Capital of USA?</option>
+								</select></td>
+							</tr>
+							<tr>
+								<td id="td_right"><label for="secret_question_answer0">Security Answer</label></td>
+				
+								<td id="td_left"><input name="secret.question0.answer" id="secret_question_answer0" value="" size="20" tabindex="7" type="text" onkeyup="checkQ0Ans();" placeholder="Security Answer"/><div id="divCheckAns0"></div></td>
+							</tr>
+							<tr>
+								<td id="td_right"><label for="secret_question1">Security Question</label></td>
+							
+								<td id="td_left">
+									<select name="secret.question1" id="secret_question1" class="select" tabindex="8" onchange="checkQuestionMatch()">
+									<option value="0">--</option>
+									<option value="1">Sum of 2 + 3 = ?</option>
+									<option value="2">Sum of 100 + 200 = ?</option>
+									<option value="3">23 x 100 = ?</option>
+									<option value="4">Capital of India?</option>
+									<option value="5">Capital of USA?</option>
+								</select><div id="divCheckQuestion"></td>
+							</tr>
+							<tr>
+								<td id="td_right"><label for="secret_question_answer1">Security Answer</label></td>
+					
+								<td id="td_left"><input name="secret.question1.answer" id="secret_question_answer1" value="" size="20" tabindex="9" type="text" onkeyup="checkQ1Ans();" placeholder="Security Answer"/><div id="divCheckAns1"></div></td>
+							</tr>
+							<tr>	
+								<td id="td_right"><label style="color:blue" for="mobile">Mobile:</label></td>
+					
+								<td id="td_left"><input type="tel" name="mobile" id="mobile" value="" tabindex="1" placeholder="Mobile"/></td>
+							</tr>
+							<tr>
+								<td id="td_right"><label style="color:blue" for="address">Address:</label></td>
+							
+								<td id="td_left"><textarea name="address" id="address" class="textarea" value="" tabindex="1"></textarea></td>
+							</tr>
+							<tr>
+								<td id="td_right"></td>
+								<td id="td_left"><label for="area_of_interest">Area you may be interested in, please enter one or more:</label></td>
+							</tr>
+							<tr>
+								<td id="td_right"></td>
+								<td id="td_left"><textarea name="area_of_interest" id="area_of_interest" class="textarea" value="" tabindex="1"></textarea></td>
+							</tr>
+							<tr>
+								<td>
+								<p>Drag the image into the rectangle:</p>
+								</td>
+	
+								<td><div id="src">
+								<img draggable="true" width="100" height="69" id="banana" src="Banana.jpg" alt="banana"/>
+								<img draggable="true" width="100" height="69" id="sparta" src="sparta.jpg" alt="apple"/>
+								<img draggable="true" width="100" height="69" id="cisco" src="cisco.gif" alt="cherry"/>
+								<div id="target">
+								<p id="msg">Drop Here</p>
+								</div></td>
+							</div>
+						
+							<script>
+							var src = document.getElementById("src");
+							var target = document.getElementById("target");
+							var msg = document.getElementById("msg");
+							var draggedID;
+							target.ondragenter = handleDrag;
+							target.ondragover = handleDrag;
+
+								target.ondrop = function(e) {
+								var newElem = document.getElementById(draggedID).cloneNode(false);
+								target.innerHTML = "";
+								target.appendChild(newElem);
+								//document.getElementById(draggedID).remove();
+								e.preventDefault();
+							}
+							function handleDrag(e) {
+							e.preventDefault();
+							}
+							src.ondragstart = function(e) {
+							draggedID = e.target.id;
+							e.target.classList.add("dragged");
+							}
+							src.ondragend = function(e) {
+							var elems = document.querySelectorAll(".dragged");
+							for (var i = 0; i < elems.length; i++) {
+							elems[i].classList.remove("dragged");
+							}
+							}
+							</script>
+							</tr>
+							<tr>	
+								<td id="td_right"></td>
+								<td id="td_left"><input name="Submit" value="Register" id="button" tabindex="24" onclick="saveFields();" type="button" />
+			
+								<input name="Cancel" id="button" value="Cancel" tabindex="25" type="reset" /></td>		
+							</tr>		
+				</table>
+				</form>				
+			<script type="text/javascript" src="js/script.js"></script>
+		</div>
+	</center>
+</body>
+</html>
